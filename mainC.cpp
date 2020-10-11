@@ -1,4 +1,4 @@
-/*лндскэмши реяр йкюяяю Commission*/
+О╩©/*п°п·п■пёп⌡п╛п²п╚п≥ п╒п∙п║п╒ п п⌡п░п║п║п░ Commission*/
 
 //#include <iostream>
 //#include <Windows.h>

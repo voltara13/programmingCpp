@@ -1,4 +1,4 @@
-/*МОДУЛЬНЫЙ ТЕСТ КЛАССА Hourly*/
+﻿/*МОДУЛЬНЫЙ ТЕСТ КЛАССА Hourly*/
 
 //#include <iostream>
 //#include <Windows.h>
