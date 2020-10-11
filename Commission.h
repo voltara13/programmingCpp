@@ -8,7 +8,6 @@ class Commission : public Company
 	float percent = 0;
 	/*Количество продаж,
 	процент с одной продажи*/
-	const char end_of_tag = ';';
 public:
 	//Конструктор с параметрами, конструктор по-умолчанию
 	Commission(string _fullName = "",
@@ -16,7 +15,7 @@ public:
 		float _salary = 0,
 		float _percent = 0) :
 		Company(_fullName, _gender, _salary),
-		percent{ _percent / 100 } {}
+		percent{ _percent } {}
 
 	void Work(int sales) //Функция добавления продаж
 	{
@@ -25,7 +24,7 @@ public:
 
 	void CalculateSalary() //Функция расчёта зарплаты и обнуления выполненной работы
 	{
-		wage += GetSalary() + work * GetSalary() * percent;
+		wage += GetSalary() + GetSalary() * work * percent / 100;
 		work = 0;
 	}
 
@@ -34,14 +33,14 @@ public:
 		return "комиссионный, продажи: " + to_string(work);
 	}
 
-	string serialize()
+	string Serialize()
 	{
 		stringstream ss;
-		ss << "type=" << "c" << end_of_tag
-			<< "fullName=" << GetName() << end_of_tag
-			<< "gender=" << GetGender() << end_of_tag
-			<< "salary=" << GetSalary() << end_of_tag
-			<< "percent=" << GetPercent() << end_of_tag;
+		ss << "type=" << "c" << ';'
+			<< "fullName=" << GetName() << ';'
+			<< "gender=" << GetGender() << ';'
+			<< "salary=" << GetSalary() << ';'
+			<< "percent=" << GetPercent() << ';';
 		return ss.str();
 	}
 

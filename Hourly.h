@@ -9,7 +9,6 @@ class Hourly : public Company
 	/*Количество отработанных часов,
 	повышенная зарплата в час
 	норма часов*/
-	const char end_of_tag = ';';
 public:
 	//Конструктор с параметрами, конструктор по-умолчанию
 	Hourly(string _fullName = "",
@@ -25,7 +24,6 @@ public:
 		this->hour += hour;
 	}
 
-
 	void CalculateSalary() //Функция расчёта зарплаты и обнуления выполненной работы
 	{
 		wage += (hour <= norm ? hour * GetSalary() : norm * GetSalary() + (hour - norm) * incSalary);
@@ -37,15 +35,15 @@ public:
 		return "почасовой, часы: " + to_string(hour);
 	}
 
-	string serialize()
+	string Serialize()
 	{
 		stringstream ss;
-		ss << "type=" << "h" << end_of_tag
-			<< "fullName=" << GetName() << end_of_tag
-			<< "gender=" << GetGender() << end_of_tag
-			<< "salary=" << GetSalary() << end_of_tag
-			<< "incSalary=" << GetIncSalary() << end_of_tag
-			<< "norm=" << GetNorm() << end_of_tag;
+		ss << "type=" << "h" << ';'
+			<< "fullName=" << GetName() << ';'
+			<< "gender=" << GetGender() << ';'
+			<< "salary=" << GetSalary() << ';'
+			<< "incSalary=" << GetIncSalary() << ';'
+			<< "norm=" << GetNorm() << ';';
 		return ss.str();
 	}
 
