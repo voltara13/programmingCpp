@@ -10,7 +10,7 @@ class Company
 protected:
 	float wage = 0; //Полная зарплата
 public:
-	virtual void CalculateSalary() = 0; //Виртуальная функция расчёта полной зарплаты
+	virtual void CalculateSalary() = 0; //Виртуальная функция расчета полной зарплаты
 	virtual void Work(int work) = 0; //Виртуальная функция добавления работы
 	virtual string GetWork() = 0; //Виртуальная функция получения количества выполненной работы
 	friend ostream &operator << (ostream &out, Company &worker); //Дружественный перегруженный оператор вывода
