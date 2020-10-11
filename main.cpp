@@ -1,28 +1,90 @@
 ﻿#include <iostream>
-#include <Windows.h>
 #include <vector>
 #include <string>
 #include <ctime>
+#include <sstream>
+#include <fstream>
+#include <Windows.h>
 #include "Hourly.h"
 #include "Commission.h"
 using namespace std;
 
-#define wrongChoice cerr << "\nВыбран неверный вариант. Попробуйте ещё раз\n";
+#define WRONG_CHOICE cerr << "\nВыбран неверный вариант. Попробуйте ещё раз\n";
 
-vector<Company *> companyWorkers;
+vector<Company*> companyWorkers;
+
+Company* DeserializeH(const string& data) //Десериализация почасового работника
+{
+	Company* worker = nullptr;
+	string fullName, gender;
+	float salary, incSalary, norm;
+	stringstream ss(data);
+	for (string token; getline(ss, token, ';');)
+	{
+		size_t found = token.find('=');
+		string tag = token.substr(0, found);
+		string value = token.substr(found + 1, token.length());
+
+		if (tag == "fullName") fullName = value;
+		else if (tag == "gender") gender = value;
+		else if (tag == "salary") salary = atof(value.c_str());
+		else if (tag == "incSalary") incSalary = atof(value.c_str());
+		else if (tag == "norm") norm = atof(value.c_str());
+	}
+	worker = new Hourly(fullName, gender, salary, incSalary, norm);
+	return worker;
+}
+
+Company* DeserializeC(const string& data) //Десериализация комиссионного работника
+{
+	Company* worker = nullptr;
+	string fullname, gender;
+	float salary, percent;
+	stringstream ss(data);
+	for (string token; getline(ss, token, ';');)
+	{
+		size_t found = token.find('=');
+		string tag = token.substr(0, found);
+		string value = token.substr(found + 1, token.length());
+
+		if (tag == "fullName") fullname = value;
+		else if (tag == "gender") gender = value;
+		else if (tag == "salary") salary = atof(value.c_str());
+		else if (tag == "percent") percent = atof(value.c_str());
+	}
+	worker = new Commission(fullname, gender, salary, percent);
+	return worker;
+}
+
+void DeserializeVector() //Функция десериализации вектора
+{
+	fstream fs;
+	fs.open("serialize.bin", ios::in | ios::binary);
+	for (string temp; getline(fs, temp, '^');)
+	{
+		if (temp[temp.find('=') + 1] == 'h') companyWorkers.push_back(DeserializeH(temp));
+		else if (temp[temp.find('=') + 1] == 'c') companyWorkers.push_back(DeserializeC(temp));
+	}
+	fs.close();
+	cout << "Десериализация успешно выполнена\n";
+}
+
+void SerializeVector() //Функция сериализации вектора
+{
+	fstream fs("serialize.bin", ios::app | ios::binary);
+	for (auto* it : companyWorkers) fs << it->Serialize() << "^\n";
+	fs.close();
+	cout << "Сериализация успешно выполнена\n";
+}
 
 bool Check() //Функция проверки вектора на пустоту
 {
-	if (companyWorkers.size()) return true;
-
-	else
-	{
-		cout << "\nНе добавлено ни одного работника. Список пуст\n";
-		return false;
-	}
+	if (!companyWorkers.empty()) return true;
+	cout << "\nНе добавлено ни одного работника. Список пуст\n";
+	return false;
 }
 
-void Dismiss() //Функция увольнения/
+void Dismiss() //Функция увольнения
 {
 	int worker;
 	while (true)
@@ -37,7 +99,7 @@ void Dismiss() //Функция увольнения/
 		}
 		catch (const out_of_range)
 		{
-			wrongChoice
+			WRONG_CHOICE
 			continue;
 		}
 		cout << "Работник успешно уволен\n";
@@ -50,11 +112,11 @@ void AddWorker() //Функция добавления нового работн
 	string fullName, gender;
 	float salary, incSalary, percent, norm;
 	int group;
-	Company *worker = nullptr;
-	
+	Company* worker = nullptr;
+
 	cout << "\nВыберите тип работника:\n" <<
-			"'1' - Почасовой\n'2' - Комиссионный\n" <<
-			"'Другой вариант' - Вернуться назад\nВВОД: ";
+		"'1' - Почасовой\n'2' - Комиссионный\n" <<
+		"'Другой вариант' - Вернуться назад\nВВОД: ";
 	cin >> group;
 	if (group != 1 && group != 2) return;
 	cout << "Введите ФИО работника: ";
@@ -104,22 +166,33 @@ void SimulateWork() //Функция симуляции работы
 	Company::SimulateWork(day, companyWorkers);
 }
 
+void Clear() //Функция очистки вектора
+{
+	for (auto pObj = companyWorkers.begin(); pObj != companyWorkers.end(); ++pObj)
+		delete *pObj;
+	companyWorkers.clear();
+	cout << "Список успешно очищен\n";
+}
+
 void Menu() //Функция селектора меню
 {
 	int ans;
 	while (true)
 	{
-		cout << "\nСИСТЕМА РАСЧЁТА ЗАРПЛАТЫ\n\n" <<
+		cout << "\nСИСТЕМА РАСЧЕТА ЗАРПЛАТЫ\n\n" <<
 			"Введите:\n" <<
 			"'1' - Чтобы добавить работника\n" <<
 			"'2' - Чтобы вывести список работников\n" <<
 			"'3' - Чтобы уволить работника\n" <<
 			"'4' - Чтобы смоделировать работу\n" <<
+			"'5' - Чтобы сделать сериализацию\n" <<
+			"'6' - Чтобы сделать десериализацию\n" <<
+			"'7' - Чтобы очистить список\n" <<
 			"'0' - Чтобы выйти из программы\n" <<
 			"ВВОД: ";
 
 		cin >> ans;
-		if ((ans != 0 && ans != 1 ) && !Check()) continue;
+		if ((ans != 0 && ans != 1 && ans != 6) && !Check()) continue;
 		switch (ans)
 		{
 		case 1:
@@ -134,10 +207,20 @@ void Menu() //Функция селектора меню
 		case 4:
 			SimulateWork();
 			break;
+		case 5:
+			SerializeVector();
+			break;
+		case 6:
+			DeserializeVector();
+			break;
+		case 7:
+			Clear();
+			break;
 		case 0:
+			Clear();
 			exit(0);
 		default:
-			wrongChoice
+			WRONG_CHOICE
 		}
 	}
 }
@@ -147,8 +230,5 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	Menu();
-	for (auto pObj = companyWorkers.begin(); pObj != companyWorkers.end(); ++pObj)
-		delete *pObj;
-	companyWorkers.clear();
 	return 0;
 }
