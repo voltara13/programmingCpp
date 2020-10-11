@@ -22,12 +22,12 @@ public:
 		this->work += sales;
 	}
 
-	string GetWork() //Функция вовзрата количества продаж
+	string GetWork() //Функция возврата количества продаж
 	{
 		return "комиссионный, продажи: " + to_string(work);
 	}
 
-	void CalculateSalary() //Функция расчёта зарплаты и обнуления выполненной работы
+	void CalculateSalary() //Функция расчета зарплаты и обнуления выполненной работы
 	{
 		wage += GetSalary() + work * GetSalary() * percent;
 		work = 0;

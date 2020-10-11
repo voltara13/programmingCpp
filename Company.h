@@ -28,7 +28,7 @@ public:
 			for (auto *it : workers) it->Work(1 + rand() % 10);
 			if (i % 15 == 0)
 			{
-				cout << "ДЕНЬ РАСЧЁТА ЗАРПЛАТЫ\n";
+				cout << "ДЕНЬ РАСЧЕТА ЗАРПЛАТЫ\n";
 				for (auto *it : workers) it->CalculateSalary();
 			}
 			for (auto *it : workers) cout << *it;			

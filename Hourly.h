@@ -29,7 +29,7 @@ public:
 		return "почасовой, часы: " + to_string(hour);
 	}
 
-	void CalculateSalary() //Функция расчёта зарплаты и обнуления выполненной работы
+	void CalculateSalary() //Функция расчета зарплаты и обнуления выполненной работы
 	{
 		wage += (hour <= norm ? hour * GetSalary() : norm * GetSalary() + (hour - norm) * incSalary);
 		hour = 0;

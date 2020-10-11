@@ -37,7 +37,7 @@ void Dismiss() //Функция увольнения
 		}
 		catch (const out_of_range)
 		{
-			wrongChoice;
+			wrongChoice
 			continue;
 		}
 		cout << "Работник успешно уволен\n";
@@ -137,7 +137,7 @@ void Menu() //Функция селектора меню
 		case 0:
 			exit(0);
 		default:
-			wrongChoice;
+			wrongChoice
 		}
 	}
 }
