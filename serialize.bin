@@ -1,1 +1,2 @@
-type=h;fullName=Симонов Владислав Игоревич;gender=М;salary=600;incSalary=700;norm=8;^type=c;fullName=Подгорный Михаил Евгеньевич;gender=М;salary=10000;percent=3;^
+type=h;fullName=Симонов Владислав Игоревич;gender=М;salary=600;incSalary=700;norm=8;^
+type=c;fullName=Подгорный Михаил Евгеньевич;gender=М;salary=10000;percent=3;^

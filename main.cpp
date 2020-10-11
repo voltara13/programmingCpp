@@ -72,7 +72,7 @@ void DeserializeVector() //Функция десериализации вект�
 void SerializeVector() //Функция сериализации вектора
 {
 	fstream fs("serialize.bin", ios::app | ios::binary);
-	for (auto* it : companyWorkers) fs << it->Serialize() << '^';
+	for (auto* it : companyWorkers) fs << it->Serialize() << "^\n";
 	fs.close();
 	cout << "Сериализация успешно выполнена\n";
 }
