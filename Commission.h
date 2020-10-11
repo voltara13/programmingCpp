@@ -1,50 +1,50 @@
-#pragma once
+п»ї#pragma once
 
 using namespace std;
 
 class Commission
 {
-	string fullName, gender; //ФИО, пол
-	int sales = 0; //Количество продаж
+	string fullName, gender; //Р¤РРћ, РїРѕР»
+	int sales = 0; //РљРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕРґР°Р¶
 	float salary = 0, percent = 0, wage = 0;
-	/*Постоянная ставка, процент с продаж,
-	общая зарплата*/
+	/*РџРѕСЃС‚РѕСЏРЅРЅР°СЏ СЃС‚Р°РІРєР°, РїСЂРѕС†РµРЅС‚ СЃ РїСЂРѕРґР°Р¶,
+	РѕР±С‰Р°СЏ Р·Р°СЂРїР»Р°С‚Р°*/
 public:
-	//Конструктор с параметрами, конструктор по-умолчанию
+	//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё, РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ-СѓРјРѕР»С‡Р°РЅРёСЋ
 	Commission(string _fullName = "", 
 		string _gender = "",
 		float _salary = 0, 
 		float _percent = 0) : 
 		fullName{_fullName}, gender{_gender }, salary{_salary}, percent{_percent / 100} {}
 
-	void Sell(int sales) //Функция добавления продаж
+	void Sell(int sales) //Р¤СѓРЅРєС†РёСЏ РґРѕР±Р°РІР»РµРЅРёСЏ РїСЂРѕРґР°Р¶
 	{
 		this->sales += sales;
 	}
 
-	int GetWork() //Функция вовзрата количества продаж
+	int GetWork() //Р¤СѓРЅРєС†РёСЏ РІРѕРІР·СЂР°С‚Р° РєРѕР»РёС‡РµСЃС‚РІР° РїСЂРѕРґР°Р¶
 	{
 		return sales;
 	}
 
-	float CalculateSalary() //Функция расчёта и возврата зарплаты
+	float CalculateSalary() //Р¤СѓРЅРєС†РёСЏ СЂР°СЃС‡С‘С‚Р° Рё РІРѕР·РІСЂР°С‚Р° Р·Р°СЂРїР»Р°С‚С‹
 	{
 		wage += salary + sales * salary * percent;
 		sales = 0;
 		return wage;
 	}
 
-	float GetWage() //Функция возврата общей зарплаты
+	float GetWage() //Р¤СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‚Р° РѕР±С‰РµР№ Р·Р°СЂРїР»Р°С‚С‹
 	{
 		return wage;
 	}
 
-	string GetName() //Функция возврата ФИО
+	string GetName() //Р¤СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‚Р° Р¤РРћ
 	{
 		return fullName;
 	}
 
-	string GetGender() //Функция возврата пола
+	string GetGender() //Р¤СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‚Р° РїРѕР»Р°
 	{
 		return gender;
 	}

@@ -1,16 +1,16 @@
-#pragma once
+п»ї#pragma once
 
 using namespace std;
 
 class Hourly
 {
-	string fullName, gender; //ФИО, пол
+	string fullName, gender; //Р¤РРћ, РїРѕР»
 	float hour = 0, salary = 0, incSalary = 0, norm = 0, wage = 0;
-	/*Количество отработанных часов, 
-	зарплата в час, повышенная зарплата в час
-	норма часов, общая зарплата*/
+	/*РљРѕР»РёС‡РµСЃС‚РІРѕ РѕС‚СЂР°Р±РѕС‚Р°РЅРЅС‹С… С‡Р°СЃРѕРІ, 
+	Р·Р°СЂРїР»Р°С‚Р° РІ С‡Р°СЃ, РїРѕРІС‹С€РµРЅРЅР°СЏ Р·Р°СЂРїР»Р°С‚Р° РІ С‡Р°СЃ
+	РЅРѕСЂРјР° С‡Р°СЃРѕРІ, РѕР±С‰Р°СЏ Р·Р°СЂРїР»Р°С‚Р°*/
 public:
-	//Конструктор с параметрами, конструктор по-умолчанию
+	//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё, РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ-СѓРјРѕР»С‡Р°РЅРёСЋ
 	Hourly(string _fullName = "", 
 		string _gender = "",
 		float _salary = 0, 
@@ -18,34 +18,34 @@ public:
 		float _norm = 0) :
 		fullName{_fullName}, gender{_gender}, salary{_salary}, incSalary{_incSalary}, norm{_norm} {}
 
-	void Work(float hour) //Функция добавления количества отработанных часов
+	void Work(float hour) //Р¤СѓРЅРєС†РёСЏ РґРѕР±Р°РІР»РµРЅРёСЏ РєРѕР»РёС‡РµСЃС‚РІР° РѕС‚СЂР°Р±РѕС‚Р°РЅРЅС‹С… С‡Р°СЃРѕРІ
 	{
 		this->hour += hour;
 	}
 
-	float GetWork() //Функция возврата количества часов
+	float GetWork() //Р¤СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‚Р° РєРѕР»РёС‡РµСЃС‚РІР° С‡Р°СЃРѕРІ
 	{
 		return hour;
 	}
 
-	float GetWage() //Функция возврата общей зарплаты
+	float GetWage() //Р¤СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‚Р° РѕР±С‰РµР№ Р·Р°СЂРїР»Р°С‚С‹
 	{
 		return wage;
 	}
 
-	float CalculateSalary() //Функция расчёта и возврата зарплаты
+	float CalculateSalary() //Р¤СѓРЅРєС†РёСЏ СЂР°СЃС‡С‘С‚Р° Рё РІРѕР·РІСЂР°С‚Р° Р·Р°СЂРїР»Р°С‚С‹
 	{
 		wage += (hour <= norm ? hour * salary : norm * salary + (hour - norm) * incSalary);
 		hour = 0;
 		return wage;
 	}
 
-	string GetName() //Функция возврата ФИО
+	string GetName() //Р¤СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‚Р° Р¤РРћ
 	{
 		return fullName;
 	}
 
-	string GetGender() //Функция возврата пола
+	string GetGender() //Р¤СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‚Р° РїРѕР»Р°
 	{
 		return gender;
 	}
