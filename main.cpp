@@ -35,7 +35,7 @@ Company* DeserializeH(const string& data) //Десериализация поч�
 	return worker;
 }
 
-Company* DeserializeC(const string data) //Десериализация комиссионного работника
+Company* DeserializeC(const string& data) //Десериализация комиссионного работника
 {
 	Company* worker = nullptr;
 	string fullname, gender;
