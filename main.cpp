@@ -1,4 +1,4 @@
-п»ї#include <iostream>
+#include <iostream>
 #include <vector>
 #include <string>
 #include <ctime>
@@ -9,13 +9,13 @@
 #include "Commission.h"
 using namespace std;
 
-#define WRONG_CHOICE cerr << "\nР’С‹Р±СЂР°РЅ РЅРµРІРµСЂРЅС‹Р№ РІР°СЂРёР°РЅС‚. РџРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰С‘ СЂР°Р·\n";
+#define WRONG_CHOICE cerr << "\nВыбран неверный вариант. Попробуйте ещё раз\n";
 
-vector<Company*> companyWorkers;
+vector<Company *> companyWorkers;
 
-Company* DeserializeH(const string& data) //Р”РµСЃРµСЂРёР°Р»РёР·Р°С†РёСЏ РїРѕС‡Р°СЃРѕРІРѕРіРѕ СЂР°Р±РѕС‚РЅРёРєР°
+Company *DeserializeH(const string &data) //Десериализация почасового работника
 {
-	Company* worker = nullptr;
+	Company *worker = nullptr;
 	string fullName, gender;
 	float salary, incSalary, norm;
 	stringstream ss(data);
@@ -35,9 +35,9 @@ Company* DeserializeH(const string& data) //Р”РµСЃРµСЂРёР°Р»РёР·Р°С†РёСЏ РїРѕС‡Р
 	return worker;
 }
 
-Company* DeserializeC(const string& data) //Р”РµСЃРµСЂРёР°Р»РёР·Р°С†РёСЏ РєРѕРјРёСЃСЃРёРѕРЅРЅРѕРіРѕ СЂР°Р±РѕС‚РЅРёРєР°
+Company *DeserializeC(const string &data) //Десериализация комиссионного работника
 {
-	Company* worker = nullptr;
+	Company *worker = nullptr;
 	string fullname, gender;
 	float salary, percent;
 	stringstream ss(data);
@@ -56,7 +56,7 @@ Company* DeserializeC(const string& data) //Р”РµСЃРµСЂРёР°Р»РёР·Р°С†РёСЏ РєРѕРјР
 	return worker;
 }
 
-void DeserializeVector() //Р¤СѓРЅРєС†РёСЏ РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё РІРµРєС‚РѕСЂР°
+void DeserializeVector() //Функция десериализации вектора
 {
 	fstream fs;
 	fs.open("serialize.bin", ios::in | ios::binary);
@@ -66,30 +66,30 @@ void DeserializeVector() //Р¤СѓРЅРєС†РёСЏ РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё РІРµРєС‚Р
 		else if (temp[temp.find('=') + 1] == 'c') companyWorkers.push_back(DeserializeC(temp));
 	}
 	fs.close();
-	cout << "Р”РµСЃРµСЂРёР°Р»РёР·Р°С†РёСЏ СѓСЃРїРµС€РЅРѕ РІС‹РїРѕР»РЅРµРЅР°\n";
+	cout << "Десериализация успешно выполнена\n";
 }
 
-void SerializeVector() //Р¤СѓРЅРєС†РёСЏ СЃРµСЂРёР°Р»РёР·Р°С†РёРё РІРµРєС‚РѕСЂР°
+void SerializeVector() //Функция сериализации вектора
 {
 	fstream fs("serialize.bin", ios::app | ios::binary);
-	for (auto* it : companyWorkers) fs << it->Serialize() << "^\n";
+	for (auto *it : companyWorkers) fs << it->Serialize() << "^\n";
 	fs.close();
-	cout << "РЎРµСЂРёР°Р»РёР·Р°С†РёСЏ СѓСЃРїРµС€РЅРѕ РІС‹РїРѕР»РЅРµРЅР°\n";
+	cout << "Сериализация успешно выполнена\n";
 }
 
-bool Check() //Р¤СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂРєРё РІРµРєС‚РѕСЂР° РЅР° РїСѓСЃС‚РѕС‚Сѓ
+bool Check() //Функция проверки вектора на пустоту
 {
 	if (!companyWorkers.empty()) return true;
-	cout << "\nРќРµ РґРѕР±Р°РІР»РµРЅРѕ РЅРё РѕРґРЅРѕРіРѕ СЂР°Р±РѕС‚РЅРёРєР°. РЎРїРёСЃРѕРє РїСѓСЃС‚\n";
+	cout << "\nНе добавлено ни одного работника. Список пуст\n";
 	return false;
 }
 
-void Dismiss() //Р¤СѓРЅРєС†РёСЏ СѓРІРѕР»СЊРЅРµРЅРёСЏ
+void Dismiss() //Функция увольнения
 {
 	int worker;
 	while (true)
 	{
-		cout << "\nР’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ СЂР°Р±РѕС‚РЅРёРєР° ('0' - Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР°Р·Р°Рґ): ";
+		cout << "\nВведите номер работника ('0' - Вернуться назад): ";
 		cin >> worker;
 		if (!worker) return;
 		try
@@ -100,50 +100,50 @@ void Dismiss() //Р¤СѓРЅРєС†РёСЏ СѓРІРѕР»СЊРЅРµРЅРёСЏ
 		catch (const out_of_range)
 		{
 			WRONG_CHOICE
-			continue;
+				continue;
 		}
-		cout << "Р Р°Р±РѕС‚РЅРёРє СѓСЃРїРµС€РЅРѕ СѓРІРѕР»РµРЅ\n";
+		cout << "Работник успешно уволен\n";
 		break;
 	}
 }
 
-void AddWorker() //Р¤СѓРЅРєС†РёСЏ РґРѕР±Р°РІР»РµРЅРёСЏ РЅРѕРІРѕРіРѕ СЂР°Р±РѕС‚РЅРёРєР°
+void AddWorker() //Функция добавления нового работника
 {
 	string fullName, gender;
 	float salary, incSalary, percent, norm;
 	int group;
-	Company* worker = nullptr;
+	Company *worker = nullptr;
 
-	cout << "\nР’С‹Р±РµСЂРёС‚Рµ С‚РёРї СЂР°Р±РѕС‚РЅРёРєР°:\n" <<
-		"'1' - РџРѕС‡Р°СЃРѕРІРѕР№\n'2' - РљРѕРјРёСЃСЃРёРѕРЅРЅС‹Р№\n" <<
-		"'Р”СЂСѓРіРѕР№ РІР°СЂРёР°РЅС‚' - Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР°Р·Р°Рґ\nР’Р’РћР”: ";
+	cout << "\nВыберите тип работника:\n" <<
+		"'1' - Почасовой\n'2' - Комиссионный\n" <<
+		"'Другой вариант' - Вернуться назад\nВВОД: ";
 	cin >> group;
 	if (group != 1 && group != 2) return;
-	cout << "Р’РІРµРґРёС‚Рµ Р¤РРћ СЂР°Р±РѕС‚РЅРёРєР°: ";
+	cout << "Введите ФИО работника: ";
 	cin.ignore(32767, '\n');
-	/*РРіРЅРѕСЂРёСЂСѓРµРј СЃРёРјРІРѕР» РЅРѕРІРѕР№ СЃС‚СЂРѕРєРё
-	С‡С‚РѕР±С‹ Р±С‹Р»Р° РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РЅРѕСЂРјР°Р»СЊРЅРѕ СЃС‡РёС‚Р°С‚СЊ
-	С„СЂР°Р·Сѓ РёР· РїРѕС‚РѕРєР° РІРІРѕРґР°*/
+	/*Игнорируем символ новой строки
+	чтобы была возможность нормально считать
+	фразу из потока ввода*/
 	getline(cin, fullName);
-	cout << "Р’РІРµРґРёС‚Рµ РїРѕР» СЂР°Р±РѕС‚РЅРёРєР°: ";
+	cout << "Введите пол работника: ";
 	cin >> gender;
 
 	switch (group)
 	{
 	case 1:
-		cout << "Р’РІРµРґРёС‚Рµ СЃС‚Р°РІРєСѓ Р·Р° С‡Р°СЃ: ";
+		cout << "Введите ставку за час: ";
 		cin >> salary;
-		cout << "Р’РІРµРґРёС‚Рµ РїРѕРІС‹С€РµРЅРЅСѓСЋ СЃС‚Р°РІРєСѓ Р·Р° С‡Р°СЃ: ";
+		cout << "Введите повышенную ставку за час: ";
 		cin >> incSalary;
-		cout << "Р’РІРµРґРёС‚Рµ РЅРѕСЂРјСѓ С‡Р°СЃРѕРІ: ";
+		cout << "Введите норму часов: ";
 		cin >> norm;
 		worker = new Hourly(fullName, gender, salary, incSalary, norm);
 		companyWorkers.push_back(worker);
 		break;
 	case 2:
-		cout << "Р’РІРµРґРёС‚Рµ С„РёРєСЃРёСЂРѕРІР°РЅРЅС‹Р№ РѕРєР»Р°Рґ: ";
+		cout << "Введите фиксированный оклад: ";
 		cin >> salary;
-		cout << "Р’РІРµРґРёС‚Рµ РїСЂРѕС†РµРЅС‚ Р·Р° РєР°Р¶РґСѓСЋ РїСЂРѕРґР°Р¶Сѓ: ";
+		cout << "Введите процент за каждую продажу: ";
 		cin >> percent;
 		worker = new Commission(fullName, gender, salary, percent);
 		companyWorkers.push_back(worker);
@@ -151,45 +151,45 @@ void AddWorker() //Р¤СѓРЅРєС†РёСЏ РґРѕР±Р°РІР»РµРЅРёСЏ РЅРѕРІРѕРіРѕ СЂР°Р±РѕС‚РЅ
 	}
 }
 
-void PutList() //Р¤СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° РІРµРєС‚РѕСЂР°
+void PutList() //Функция вывода вектора
 {
 	for (unsigned int i = 0; i < companyWorkers.size(); ++i)
 		cout << i + 1 << ". " << *companyWorkers[i];
 }
 
-void SimulateWork() //Р¤СѓРЅРєС†РёСЏ СЃРёРјСѓР»СЏС†РёРё СЂР°Р±РѕС‚С‹
+void SimulateWork() //Функция симуляции работы
 {
 	int day;
-	cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РґРЅРµР№, СЃРєРѕР»СЊРєРѕ РјРѕРґРµР»РёСЂРѕРІР°С‚СЊ СЂР°Р±РѕС‚Сѓ ('0' - Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР°Р·Р°Рґ): ";
+	cout << "Введите количество дней, сколько моделировать работу ('0' - Вернуться назад): ";
 	cin >> day;
 	if (!day) return;
 	Company::SimulateWork(day, companyWorkers);
 }
 
-void Clear() //Р¤СѓРЅРєС†РёСЏ РѕС‡РёСЃС‚РєРё РІРµРєС‚РѕСЂР°
+void Clear() //Функция очистки вектора
 {
 	for (auto pObj = companyWorkers.begin(); pObj != companyWorkers.end(); ++pObj)
 		delete *pObj;
 	companyWorkers.clear();
-	cout << "РЎРїРёСЃРѕРє СѓСЃРїРµС€РЅРѕ РѕС‡РёС‰РµРЅ\n";
+	cout << "Список успешно очищен\n";
 }
 
-void Menu() //Р¤СѓРЅРєС†РёСЏ СЃРµР»РµРєС‚РѕСЂР° РјРµРЅСЋ
+void Menu() //Функция селектора меню
 {
 	int ans;
 	while (true)
 	{
-		cout << "\nРЎРРЎРўР•РњРђ Р РђРЎР§Р•РўРђ Р—РђР РџР›РђРўР«\n\n" <<
-			"Р’РІРµРґРёС‚Рµ:\n" <<
-			"'1' - Р§С‚РѕР±С‹ РґРѕР±Р°РІРёС‚СЊ СЂР°Р±РѕС‚РЅРёРєР°\n" <<
-			"'2' - Р§С‚РѕР±С‹ РІС‹РІРµСЃС‚Рё СЃРїРёСЃРѕРє СЂР°Р±РѕС‚РЅРёРєРѕРІ\n" <<
-			"'3' - Р§С‚РѕР±С‹ СѓРІРѕР»РёС‚СЊ СЂР°Р±РѕС‚РЅРёРєР°\n" <<
-			"'4' - Р§С‚РѕР±С‹ СЃРјРѕРґРµР»РёСЂРѕРІР°С‚СЊ СЂР°Р±РѕС‚Сѓ\n" <<
-			"'5' - Р§С‚РѕР±С‹ СЃРґРµР»Р°С‚СЊ СЃРµСЂРёР°Р»РёР·Р°С†РёСЋ\n" <<
-			"'6' - Р§С‚РѕР±С‹ СЃРґРµР»Р°С‚СЊ РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёСЋ\n" <<
-			"'7' - Р§С‚РѕР±С‹ РѕС‡РёСЃС‚РёС‚СЊ СЃРїРёСЃРѕРє\n" <<
-			"'0' - Р§С‚РѕР±С‹ РІС‹Р№С‚Рё РёР· РїСЂРѕРіСЂР°РјРјС‹\n" <<
-			"Р’Р’РћР”: ";
+		cout << "\nСИСТЕМА РАСЧЕТА ЗАРПЛАТЫ\n\n" <<
+			"Введите:\n" <<
+			"'1' - Чтобы добавить работника\n" <<
+			"'2' - Чтобы вывести список работников\n" <<
+			"'3' - Чтобы уволить работника\n" <<
+			"'4' - Чтобы смоделировать работу\n" <<
+			"'5' - Чтобы сделать сериализацию\n" <<
+			"'6' - Чтобы сделать десериализацию\n" <<
+			"'7' - Чтобы очистить список\n" <<
+			"'0' - Чтобы выйти из программы\n" <<
+			"ВВОД: ";
 
 		cin >> ans;
 		if ((ans != 0 && ans != 1 && ans != 6) && !Check()) continue;
