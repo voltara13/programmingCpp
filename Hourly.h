@@ -12,39 +12,44 @@ class Hourly : public Company
 public:
 	//Конструктор с параметрами, конструктор по-умолчанию
 	Hourly(string _fullName = "",
-		string _gender = "",
-		float _salary = 0,
-		float _incSalary = 0,
-		float _norm = 0) :
+	       string _gender = "",
+	       float _salary = 0,
+	       float _incSalary = 0,
+	       float _norm = 0) :
 		Company(_fullName, _gender, _salary),
-		incSalary{ _incSalary }, norm{ _norm } {}
+		incSalary{_incSalary}, norm{_norm}
+	{
+	}
 
-	void Work(int hour) //Функция добавления часов
+	void Work(int hour) override
+	//Функция добавления часов
 	{
 		this->hour += hour;
 	}
 
-	void CalculateSalary() //Функция расчёта зарплаты и обнуления выполненной работы
+	void CalculateSalary() override
+	//Функция расчёта зарплаты и обнуления выполненной работы
 	{
 		wage += (hour <= norm ? hour * GetSalary() : norm * GetSalary() + (hour - norm) * incSalary);
 		hour = 0;
 	}
 
-	string GetWork() //Функция возврата количества часов
+	string GetWork() override
+	//Функция возврата количества часов
 	{
 		return "почасовой, часы: " + to_string(hour);
 	}
 
-	string Serialize() //Функция сериализации
+	string Serialize() override
+	//Функция сериализации
 	{
 		stringstream ss;
-		ss	<< "type="		<< "h"			<< ';'
-			<< "fullName="	<< GetName()	<< ';'
-			<< "gender="	<< GetGender()	<< ';'
-			<< "salary="	<< GetSalary()	<< ';'
-			<< "incSalary="	<< incSalary	<< ';'
-			<< "norm="		<< norm			<< ';';
+		ss << "type=" << "h" << ';'
+			<< "fullName=" << GetName() << ';'
+			<< "gender=" << GetGender() << ';'
+			<< "salary=" << GetSalary() << ';'
+			<< "incSalary=" << incSalary << ';'
+			<< "norm=" << norm << ';';
 		return ss.str();
 	}
 };
-

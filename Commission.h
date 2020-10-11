@@ -11,36 +11,42 @@ class Commission : public Company
 public:
 	//Конструктор с параметрами, конструктор по-умолчанию
 	Commission(string _fullName = "",
-		string _gender = "",
-		float _salary = 0,
-		float _percent = 0) :
+	           string _gender = "",
+	           float _salary = 0,
+	           float _percent = 0) :
 		Company(_fullName, _gender, _salary),
-		percent{ _percent } {}
+		percent{_percent}
+	{
+	}
 
-	void Work(int sales) //Функция добавления продаж
+	void Work(int sales) override
+	//Функция добавления продаж
 	{
 		this->work += sales;
 	}
 
-	void CalculateSalary() //Функция расчёта зарплаты и обнуления выполненной работы
+	void CalculateSalary() override
+	//Функция расчёта зарплаты и обнуления выполненной работы
 	{
 		wage += GetSalary() + GetSalary() * work * percent / 100;
 		work = 0;
 	}
 
-	string GetWork() //Функция вовзрата количества продаж
+	string GetWork() override
+	//Функция вовзрата количества продаж
 	{
 		return "комиссионный, продажи: " + to_string(work);
 	}
 
-	string Serialize() //Функция сериализации
+	string Serialize() override
+	//Функция сериализации
 	{
 		stringstream ss;
-		ss	<< "type="		<< "c"			<< ';'
-			<< "fullName="	<< GetName()	<< ';'
-			<< "gender="	<< GetGender()	<< ';'
-			<< "salary="	<< GetSalary()	<< ';'
-			<< "percent="	<< percent		<< ';';
+		ss << "type=" << "c" << ';'
+			<< "fullName=" << GetName() << ';'
+			<< "gender=" << GetGender() << ';'
+			<< "salary=" << GetSalary() << ';'
+			<< "percent=" << percent << ';';
 		return ss.str();
 	}
 };
