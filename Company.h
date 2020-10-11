@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include <sstream>
-#include <fstream>
 using namespace std;
 
 class Company
@@ -11,13 +9,10 @@ class Company
 protected:
 	float wage = 0; //Полная зарплата
 public:
-	virtual void CalculateSalary() = 0; //Виртуальная функция расчёта полной зарплаты
+	virtual void CalculateSalary() = 0; //Виртуальная функция расчета полной зарплаты
 	virtual void Work(int work) = 0; //Виртуальная функция добавления работы
 	virtual string GetWork() = 0; //Виртуальная функция получения количества выполненной работы
-	virtual string Serialize() = 0;
-	virtual float GetIncSalary() = 0; //Виртуальная функция получения повышенной ставки за час
-	virtual float GetNorm() = 0; //Виртуальная функция получения нормы часов
-	virtual float GetPercent() = 0; //Виртуальная функция получения процента за продажу
+	virtual string Serialize() = 0; //Виртуальная функция сериализации
 	friend ostream &operator << (ostream &out, Company &worker); //Дружественный перегруженный оператор вывода
 	//Конструктор с параметрами, конструктор по-умолчанию
 	Company(string _fullName = "", string _gender = "", float _salary = 0) :
@@ -59,25 +54,14 @@ public:
 	{
 		return wage;
 	}
-
-	//static vector<Company *> DeserializeVector()
-	//{
-	//	fstream fs;
-	//	fs.open("serialize.txt", ios::in | ios::binary);
-	//	for (string temp; getline(fs, temp, end_of_struct);)
-	//	{
-	//		
-	//	}
-	//	fs.close();
-	//}
 };
 
 ostream &operator << (ostream &out, Company &worker)
 {
-	out	<<	"ФИО: "				 << worker.GetName() <<
-			", пол: "			 << worker.GetGender() <<
-			", тип: "			 << worker.GetWork() <<
-			", зарплата: "		 << worker.GetSalary() <<
-			", общая зарплата: " << worker.GetWage() << endl;
+	out	<<	"ФИО: "				 << worker.GetName()	<<
+			", пол: "			 << worker.GetGender()	<<
+			", тип: "			 << worker.GetWork()	<<
+			", зарплата: "		 << worker.GetSalary()	<<
+			", общая зарплата: " << worker.GetWage()	<< endl;
 	return out;
 }

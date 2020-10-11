@@ -35,31 +35,16 @@ public:
 		return "почасовой, часы: " + to_string(hour);
 	}
 
-	string Serialize()
+	string Serialize() //Функция сериализации
 	{
 		stringstream ss;
-		ss << "type=" << "h" << ';'
-			<< "fullName=" << GetName() << ';'
-			<< "gender=" << GetGender() << ';'
-			<< "salary=" << GetSalary() << ';'
-			<< "incSalary=" << GetIncSalary() << ';'
-			<< "norm=" << GetNorm() << ';';
+		ss	<< "type="		<< "h"			<< ';'
+			<< "fullName="	<< GetName()	<< ';'
+			<< "gender="	<< GetGender()	<< ';'
+			<< "salary="	<< GetSalary()	<< ';'
+			<< "incSalary="	<< incSalary	<< ';'
+			<< "norm="		<< norm			<< ';';
 		return ss.str();
-	}
-
-	float GetIncSalary()
-	{
-		return incSalary;
-	}
-
-	float GetNorm()
-	{
-		return norm;
-	}
-
-	float GetPercent()
-	{
-		return 0;
 	}
 };
 

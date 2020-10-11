@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include <ctime>
+#include <sstream>
+#include <fstream>
 #include <Windows.h>
 #include "Hourly.h"
 #include "Commission.h"
@@ -11,7 +13,7 @@ using namespace std;
 
 vector<Company *> companyWorkers;
 
-Company* DeserializeH(const string &data)
+Company* DeserializeH(const string &data) //Десериализация почасового работника
 {
 	Company *worker = nullptr;
 	string fullName, gender;
@@ -33,7 +35,7 @@ Company* DeserializeH(const string &data)
 	return worker;
 }
 
-Company* DeserializeC(const string &data)
+Company* DeserializeC(const string data) //Десериализация комиссионного работника
 {
 	Company *worker = nullptr;
 	string fullname, gender;
@@ -54,7 +56,7 @@ Company* DeserializeC(const string &data)
 	return worker;
 }
 
-void DeserializeVector()
+void DeserializeVector() //Функция десериализации вектора
 {
 	fstream fs;
 	fs.open("serialize.bin", ios::in | ios::binary);
@@ -67,7 +69,7 @@ void DeserializeVector()
 	cout << "Десериализация успешно выполнена\n";
 }
 
-void SerializeVector()
+void SerializeVector() //Функция сериализации вектора
 {
 	fstream fs("serialize.bin", ios::app | ios::binary);
 	for (auto *it : companyWorkers) fs << it->Serialize() << '^';
@@ -78,12 +80,8 @@ void SerializeVector()
 bool Check() //Функция проверки вектора на пустоту
 {
 	if (!companyWorkers.empty()) return true;
-
-	else
-	{
-		cout << "\nНе добавлено ни одного работника. Список пуст\n";
-		return false;
-	}
+	cout << "\nНе добавлено ни одного работника. Список пуст\n";
+	return false;
 }
 
 void Dismiss() //Функция увольнения
@@ -168,7 +166,7 @@ void SimulateWork() //Функция симуляции работы
 	Company::SimulateWork(day, companyWorkers);
 }
 
-void Clear()
+void Clear() //Функция очистки вектора
 {
 	for (auto pObj = companyWorkers.begin(); pObj != companyWorkers.end(); ++pObj)
 		delete *pObj;
@@ -179,7 +177,6 @@ void Clear()
 void Menu() //Функция селектора меню
 {
 	int ans;
-	Company* worker = nullptr;
 	while (true)
 	{
 		cout << "\nСИСТЕМА РАСЧЕТА ЗАРПЛАТЫ\n\n"			<<

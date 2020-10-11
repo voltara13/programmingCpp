@@ -33,29 +33,14 @@ public:
 		return "комиссионный, продажи: " + to_string(work);
 	}
 
-	string Serialize()
+	string Serialize() //Функция сериализации
 	{
 		stringstream ss;
-		ss << "type=" << "c" << ';'
-			<< "fullName=" << GetName() << ';'
-			<< "gender=" << GetGender() << ';'
-			<< "salary=" << GetSalary() << ';'
-			<< "percent=" << GetPercent() << ';';
+		ss	<< "type="		<< "c"			<< ';'
+			<< "fullName="	<< GetName()	<< ';'
+			<< "gender="	<< GetGender()	<< ';'
+			<< "salary="	<< GetSalary()	<< ';'
+			<< "percent="	<< percent		<< ';';
 		return ss.str();
-	}
-
-	float GetPercent()
-	{
-		return percent;
-	}
-
-	float GetIncSalary()
-	{
-		return 0;
-	}
-
-	float GetNorm()
-	{
-		return 0;
 	}
 };
