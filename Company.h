@@ -3,7 +3,7 @@ using namespace std;
 
 class Company
 {
-	string fullName, gender;//
+	string fullName, gender;
 	float salary;
 	/*ФИО, пол, оклад*/
 protected:

@@ -4,7 +4,7 @@ using namespace std;
 
 class Commission : public Company
 {
-	int work = 0;//
+	int work = 0;
 	float percent = 0;
 	/*Количество продаж,
 	процент с одной продажи*/
