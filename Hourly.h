@@ -4,7 +4,7 @@ using namespace std;
 
 class Hourly : public Company
 {
-	int hour = 0;
+	int hour = 0;//
 	float incSalary = 0, norm = 0;
 	/*Количество отработанных часов,
 	повышенная зарплата в час
