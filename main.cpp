@@ -11,7 +11,7 @@ using namespace std;
 
 #define WRONG_CHOICE cerr << "\nВыбран неверный вариант. Попробуйте ещё раз\n";
 
-vector<Company *> companyWorkers;
+vector<Company *> companyWorkers;//
 
 Company *DeserializeH(const string &data) //Десериализация почасового работника
 {
