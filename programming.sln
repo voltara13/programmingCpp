@@ -3,22 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draft", "..\msvcQt\draft.vcxproj", "{5D37B57A-3EC9-32C6-B80D-BCA200A94690}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "programming", "programming.vcxproj", "{AC95F299-EDC9-36B1-88EA-4C6EAFA15CEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5D37B57A-3EC9-32C6-B80D-BCA200A94690}.Debug|x64.ActiveCfg = Debug|x64
-		{5D37B57A-3EC9-32C6-B80D-BCA200A94690}.Debug|x64.Build.0 = Debug|x64
-		{5D37B57A-3EC9-32C6-B80D-BCA200A94690}.Debug|x86.ActiveCfg = Debug|x64
-		{5D37B57A-3EC9-32C6-B80D-BCA200A94690}.Release|x64.ActiveCfg = Release|x64
-		{5D37B57A-3EC9-32C6-B80D-BCA200A94690}.Release|x64.Build.0 = Release|x64
-		{5D37B57A-3EC9-32C6-B80D-BCA200A94690}.Release|x86.ActiveCfg = Release|x64
+		{AC95F299-EDC9-36B1-88EA-4C6EAFA15CEA}.Debug|x64.ActiveCfg = Debug|x64
+		{AC95F299-EDC9-36B1-88EA-4C6EAFA15CEA}.Debug|x64.Build.0 = Debug|x64
+		{AC95F299-EDC9-36B1-88EA-4C6EAFA15CEA}.Release|x64.ActiveCfg = Release|x64
+		{AC95F299-EDC9-36B1-88EA-4C6EAFA15CEA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

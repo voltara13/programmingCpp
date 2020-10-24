@@ -19,7 +19,7 @@ FORMS += \
     mainwindow.ui
 
 TRANSLATIONS += \
-    draft_ru_RU.ts
+    programming_ru_RU.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
