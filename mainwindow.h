@@ -1,24 +1,55 @@
-#include <QMainWindow>
+#pragma once
+#include <QApplication>
+#include <QInputDialog>
+#include <QRadioButton>
+#include <QFormLayout>
+#include <QDialogButtonBox>
+#include <QMessageBox>
+#include <QtGui>
+#include <QWidget>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QListWidget>
+#include <QPlainTextEdit>
+#include <vector>
+#include <string>
+#include <ctime>
+#include <sstream>
+#include <fstream>
+#include <Windows.h>
+#include "hourly.h"
+#include "commission.h"
 
-QT_BEGIN_NAMESPACE
-
-namespace Ui
-{
-	class MainWindow;
-}
-
-QT_END_NAMESPACE
-
-class MainWindow : public QMainWindow
+class mainwindow : public QWidget
 {
 Q_OBJECT
+
 public:
-	MainWindow(QWidget* parent = nullptr);
-	~MainWindow();
-public slots:
+	mainwindow(QWidget* parent = nullptr);
+private slots:
+	void addItem();
+	void addItemHourlyDialog();
+	void addItemCommissionDialog();
+	void changeItem();
+	void modeling();
+	void removeItem();
+	void clearItems();
 	void generate();
+	void serialize();
+	void deserialize();
 signals:
 	void sendText(QString);
 private:
-	Ui::MainWindow* ui;
+	company *deserializeHourly(const string &data);
+	company *deserializeCommission(const string &data);
+	vector<company *> companyWorkers;
+	QListWidget* listWidget;
+	QPushButton* addButton;
+	QPushButton* renameButton;
+	QPushButton* modelingButton;
+	QPushButton* removeButton;
+	QPushButton* cleanButton;
+	QPushButton* serializeButton;
+	QPushButton* deserializeButton;
+	QSpinBox* spinDay;
 };

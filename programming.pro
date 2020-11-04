@@ -10,13 +10,10 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    listwidget.cpp
 
 HEADERS += \
-    mainwindow.h
-
-FORMS += \
-    mainwindow.ui
+    listwidget.h
 
 TRANSLATIONS += \
     programming_ru_RU.ts
