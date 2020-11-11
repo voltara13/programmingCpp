@@ -10,10 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    listwidget.cpp
+    mainwindow.cpp
 
 HEADERS += \
-    listwidget.h
+    mainwindow.h \
+    commission.h \
+    hourly.h \
+    company.h
 
 TRANSLATIONS += \
     programming_ru_RU.ts
